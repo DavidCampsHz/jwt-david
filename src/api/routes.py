@@ -24,7 +24,7 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-@api.route('/user', methods=['POST'])
+@api.route('/signup', methods=['POST'])
 def create_user():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
@@ -53,7 +53,7 @@ def create_user():
             "token": token
         }, 200   
 
-@api.route('/login', methods=['POST'])
+@api.route('/token', methods=['POST'])
 def create_login():
     # read mail and password
     email = request.json.get("email", None)
