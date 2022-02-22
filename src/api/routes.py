@@ -20,11 +20,12 @@ def handle_hello():
 
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
+        }
 
     return jsonify(response_body), 200
 
-@api.route('/signup', methods=['POST'])
+#CREATE USER
+@api.route('/signup', methods=['POST']) #user creation
 def create_user():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
@@ -53,27 +54,45 @@ def create_user():
             "token": token
         }, 200   
 
-@api.route('/token', methods=['POST'])
-def create_login():
+#GENERATE TOKEN
+@api.route('/token', methods=['POST']) #login
+def create_token():
     # read mail and password
     email = request.json.get("email", None)
     password = request.json.get("password", None)
 
-    user = User.get_by_email(email)
-    # check that mail and password are correct
+    if email != "test" or password != "test":
+        return jsonify({"msg": "Bad username or password"}), 401
 
-    if user and check_password_hash(user.password, password):
-    # return the token
-        token = create_access_token(identity=email)
-        return {"token": token}
-    else:
-        return{"error": "user and password not valid"}, 400
+    access_token = create_access_token(identity = email)
+    return jsonify(access_token=access_token)
 
 @api.route("/protected", methods=["GET"])
 @jwt_required()
 def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
-    return jsonify("Hello World"), 200
+    return jsonify("Hello World " + current_user), 200
+
+
+    #previous code
+    # @api.route('/hello', methods=['GET']) #login
+    # @jwt_required()
+    # def get_hello():
+    #    email = get_jwt_identity()
+    #    dictionary ={
+    #    "message": "Hello " + email
+    #}
+    #return jsonify(json)
+
+    #user = User.get_by_email(email)
+    # check that mail and password are correct
+
+    #if user and check_password_hash(user.password, password):
+    # return the token
+    #    token = create_access_token(identity=email)
+    #    return {"token": token}
+    #else:
+    #    return{"error": "user and password not valid"}, 400
 
 
