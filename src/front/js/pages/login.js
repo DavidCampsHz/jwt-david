@@ -6,7 +6,7 @@ const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory;
+  const history = useHistory();
 
   console.log("This is your token", store.token);
   const changeHandler = (e) => {
