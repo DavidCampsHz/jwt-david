@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-davidcampshz-jwtdavid-hq5ibl4qknv.ws-eu33.gitpod.io/api/token",
+            "https://3001-davidcampshz-jwtdavid-hq5ibl4qknv.ws-eu34.gitpod.io/api/token",
             opts
           );
           if (resp.status !== 200) {
@@ -60,6 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("info from backend", data);
           sessionStorage.setItem("token", data.access_token);
           setStore({ token: data.access_token });
+          return true;
         } catch (error) {
           console.error("There has been an error login in");
         }
@@ -74,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
         // fetching data from the backend
         fetch(
-          "https://3001-davidcampshz-jwtdavid-hq5ibl4qknv.ws-eu33.gitpod.io//api/hello",
+          "https://3001-davidcampshz-jwtdavid-hq5ibl4qknv.ws-eu34.gitpod.io/api/hello",
           opts
         )
           .then((resp) => resp.json())
@@ -94,12 +95,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (i === index) elm.background = color;
           return elm;
         });
-
-        login: () => {
-          //input
-          //path token from the backend
-          //
-        };
 
         //reset the global store
         setStore({ demo: demo });

@@ -13,16 +13,11 @@ export const Home = () => {
   }, [store.token]);
   return (
     <div className="text-center mt-5">
-      <h1>Hello Rigo!</h1>
+      <h1>Welcome back dude!!!</h1>
       <p>
-        <img src={rigoImageUrl} />
+        <img src="https://ih1.redbubble.net/image.790350320.1950/flat,750x,075,f-pad,750x1000,f8f8f8.u5.jpg" />
       </p>
       <div className="alert alert-info">{store.message}</div>
-      <div>
-        <input type="text" />
-        <input type="password" />
-        <button>Login</button>
-      </div>
     </div>
   );
 };

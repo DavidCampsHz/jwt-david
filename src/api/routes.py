@@ -12,17 +12,19 @@ from flask_jwt_extended import jwt_required
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import timedelta
 
+#Create flask app
 api = Blueprint('api', __name__)
 
+#---- api.route created originally in the file ----
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+#@api.route('/hello', methods=['POST', 'GET'])
+#def handle_hello():
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-        }
+#    response_body = {
+#        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+#        }
 
-    return jsonify(response_body), 200
+#    return jsonify(response_body), 200
 
 #CREATE USER
 @api.route('/signup', methods=['POST']) #user creation
@@ -69,24 +71,17 @@ def create_token():
     access_token = create_access_token(identity = email)
     return jsonify(access_token=access_token)
 
-@api.route("/protected", methods=["GET"])
+    
+@api.route('/hello', methods=['GET']) #login
 @jwt_required()
-def protected():
-    # Access the identity of the current user with get_jwt_identity
-    current_user = get_jwt_identity()
-    return jsonify("Hello World " + current_user), 200
+def get_hello():
+    email = get_jwt_identity()
+    dictionary ={
+        "message": "You are now logging Mr. " + email
+    }
+    return jsonify(dictionary)
 
-
-    #previous code
-    # @api.route('/hello', methods=['GET']) #login
-    # @jwt_required()
-    # def get_hello():
-    #    email = get_jwt_identity()
-    #    dictionary ={
-    #    "message": "Hello " + email
-    #}
-    #return jsonify(json)
-
+# ---- previous code ----
     #user = User.get_by_email(email)
     # check that mail and password are correct
 

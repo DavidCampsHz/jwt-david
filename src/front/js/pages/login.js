@@ -8,7 +8,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  console.log("This is your token", store.token);
   const changeHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -16,6 +15,8 @@ const Login = () => {
   const changeHandlerPassword = (e) => {
     setPassword(e.target.value);
   };
+
+  console.log("This is your token", store.token);
 
   const handleClick = () => {
     actions.login(email, password);
